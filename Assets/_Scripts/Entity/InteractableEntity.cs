@@ -18,7 +18,7 @@ public class InteractableEntity : Entity
             Destroy(this.gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (interactOnBump)
         {
