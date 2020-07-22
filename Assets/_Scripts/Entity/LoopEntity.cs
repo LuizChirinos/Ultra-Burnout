@@ -18,7 +18,7 @@ public class LoopEntity : InteractableEntity
 
         if (other.CompareTag("Destroyer"))
         {
-            Debug.Log("Interacted with Destroyer, " + gameObject.name);
+            //Debug.Log("Interacted with Destroyer, " + gameObject.name);
             spawnManager.RespawnAt(this.transform, 1);
         }
     }

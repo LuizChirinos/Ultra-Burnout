@@ -25,11 +25,6 @@ public class PlayerStatus : MonoBehaviour
         isMoving = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     #region Gasoline Methods
     public void SetGasoline(float value)
     {

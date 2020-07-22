@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public enum Spot
+    private Transform spawnParent;
+    private Transform scenario;
+    private Transform spawnedObjectParent;
+    public List<Transform> spawns;
+    public List<SpawnObject> objectsToSpawn;
+
+    [System.Serializable]
+    public class SpawnObject
     {
-        Left,Middle, Right
+        public GameObject objectToSpawn;
+        public int chanceToSpawn;
+
     }
 
-    private Transform spawnParent;
-    public List<Transform> spawns;
-
-    public GameObject enemy;
-    public GameObject obstacle;
-    public GameObject gasoline;
-    public GameObject coin;
-
+    [Header("Spawn Fields")]
     public int randomTrack;
+    public int randomObject;
     public float counterSpawn;
     public float timeToSpawn = 1f;
 
     void Start()
     {
         spawnParent = GameObject.Find("Spawns").transform;
+        scenario = GameObject.Find("Scenario").transform;
+        spawnedObjectParent = scenario.Find("Spawned Objects");
+
         for (int i = 0; i < spawnParent.childCount; i++)
         {
             spawns.Add(spawnParent.GetChild(i));
@@ -34,19 +40,32 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        counterSpawn -= Time.deltaTime;
+        counterSpawn -= Time.deltaTime * WorldStatus.worldSpeed / 10f;
         if (counterSpawn <= 0f)
         {
+            counterSpawn = timeToSpawn;
             randomTrack = Random.Range(0, spawns.Count);
             RandomizeSpawn();
         }
     }
     private void RandomizeSpawn()
     {
+        for (int i = 0; i < objectsToSpawn.Count; i++)
+        {
+            randomObject = Random.Range(0, 10);
 
+            if (randomObject <= objectsToSpawn[i].chanceToSpawn)
+            {
+                counterSpawn = timeToSpawn;
+                Instantiate(objectsToSpawn[i].objectToSpawn, spawns[randomTrack].position, Quaternion.identity, spawnedObjectParent);
+                break;
+            }
+            else
+                continue;
+        }
     }
-    public void RespawnAt(Transform spawnPosition, int indexPosition)
+    public void RespawnAt(Transform spawnObject, int indexPosition)
     {
-        spawnPosition.position = spawns[indexPosition].position;
+        spawnObject.position = spawns[indexPosition].position;
     }
 }

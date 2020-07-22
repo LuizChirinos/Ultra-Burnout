@@ -32,11 +32,20 @@ public class PlayerInput : MonoBehaviour
         if (left) horizontal = -1;
         if (right) horizontal = 1;
 
-        canMove = Vector3.Distance(transform.position, playerMovement.target) < 0.3f ? true : false;
+        canMove = Mathf.Abs(transform.position.x - playerMovement.target.x) < 0.3f ? true : false;
     }
 
     public void OnActivateMovement()
     {
         canMove = false;
+    }
+
+    public void Left(bool value)
+    {
+        left = value;
+    }
+    public void Right(bool value)
+    {
+        right = value;
     }
 }

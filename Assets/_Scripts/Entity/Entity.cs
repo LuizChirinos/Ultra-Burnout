@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
 {
     public bool isStatic = false;
     public float speedModifier = 1f;
+    public bool destroyerTouch = false;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -20,5 +21,16 @@ public class Entity : MonoBehaviour
     {
         if (!WorldStatus.stopWorldMovement && !isStatic)
             transform.position -= new Vector3(0f, 0f, WorldStatus.worldSpeed + speedModifier) * Time.deltaTime;
+    }
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Destroyer"))
+        {
+            if (destroyerTouch)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 }

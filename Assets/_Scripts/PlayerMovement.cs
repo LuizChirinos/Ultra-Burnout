@@ -60,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F3))
             WorldStatus.stopWorldMovement = !WorldStatus.stopWorldMovement;
+
+        //Debug.Log(WorldStatus.worldSpeed);
     }
 
     private void ModeAndClamp()
