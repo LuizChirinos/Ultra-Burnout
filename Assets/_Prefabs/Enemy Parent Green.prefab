@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 157358970703643223}
   - component: {fileID: 5454129035648176630}
   - component: {fileID: 5157821699909492929}
-  - component: {fileID: -7406837692890037702}
   m_Layer: 0
   m_Name: Enemy Parent Green
   m_TagString: Untagged
@@ -45,7 +44,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 5752790673321456845}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.51552725
   m_Height: 2.6188512
   m_Direction: 2
@@ -184,19 +183,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &-7406837692890037702
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5752790673321456845}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.9010296, z: 2.0574265}
-  m_Center: {x: 0, y: 0.4297409, z: 0.013019562}
 --- !u!1 &8694837350311866576
 GameObject:
   m_ObjectHideFlags: 0

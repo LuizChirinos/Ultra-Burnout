@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StressReceiver : MonoBehaviour 
 {
-    private float _trauma;
+    public static float _trauma;
     private Vector3 _lastPosition;
     private Vector3 _lastRotation;
     [Tooltip("Exponent for calculating the shake factor. Useful for creating different effect fade outs")]
@@ -52,7 +52,7 @@ public class StressReceiver : MonoBehaviour
     ///  Applies a stress value to the current object.
     /// </summary>
     /// <param name="Stress">[0,1] Amount of stress to apply to the object</param>
-    public void InduceStress(float Stress)
+    public static void InduceStress(float Stress)
     {
         _trauma = Mathf.Clamp01(_trauma + Stress);
     }

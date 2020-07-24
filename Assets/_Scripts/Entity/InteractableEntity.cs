@@ -34,7 +34,7 @@ public class InteractableEntity : Entity
                     audioSource.Play();
             }
 
-            Debug.Log("Interacted with " + gameObject.name);
+            //Debug.Log("Interacted with " + gameObject.name);
             if (destroyOnInteraction)
                 Destroy(this.gameObject);
         }

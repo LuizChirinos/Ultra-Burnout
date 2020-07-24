@@ -29,7 +29,7 @@ public class TraumaInducer : MonoBehaviour
             if(distance > Range) continue;
             float distance01 = Mathf.Clamp01(distance / Range);
             float stress = (1 - Mathf.Pow(distance01, 2)) * MaximumStress;
-            receiver.InduceStress(stress);
+            StressReceiver.InduceStress(stress);
         }
     }
 

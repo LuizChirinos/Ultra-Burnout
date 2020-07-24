@@ -9,14 +9,14 @@ public class CarEntitty : PointsGiverEntity
     private PlayerStatus status;
     private ScreenGlassController screenGlassController;
     public GameObject explosionPrefab;
-    private StressReceiver camShake;
+    //private StressReceiver camShake;
     #endregion
 
     public override void Start()
     {
         base.Start();
         status = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
-        camShake = Camera.main.GetComponent<StressReceiver>();
+        //camShake = Camera.main.GetComponent<StressReceiver>();
         screenGlassController = GameObject.Find("GameController").GetComponent<ScreenGlassController>();
     }
 
@@ -29,7 +29,7 @@ public class CarEntitty : PointsGiverEntity
     public override void Interact()
     {
         //Shakes Camera
-        camShake.InduceStress(1f);
+        StressReceiver.InduceStress(1f);
         //Instantiate Explosion
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //Increase World Speed

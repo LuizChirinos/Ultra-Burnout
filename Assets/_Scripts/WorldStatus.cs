@@ -7,7 +7,7 @@ public class WorldStatus
 {
     public static float worldSpeed = 5;
     public static bool stopWorldMovement = false;
-    public static float maxSpeed = 15f;
+    public static float maxSpeed = 30f;
 
     #region Custom Methods
     public static void IncreaseWorldSpeed(float amount)
