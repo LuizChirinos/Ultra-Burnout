@@ -5,6 +5,7 @@ using UnityEngine;
 public class ParticleEntity : InteractableEntity
 {
     private ParticleSystem ps;
+    public bool destroyAfterFinished = true;
 
     public override void Start()
     {
@@ -17,17 +18,22 @@ public class ParticleEntity : InteractableEntity
     {
         base.Update();
 
-        if (!ps.IsAlive())
+        if (!ps.IsAlive() && destroyAfterFinished)
         {
             Destroy(this.gameObject);
         }
 
-        if (WorldStatus.stopWorldMovement)
+        if (WorldStatus.stopWorldMovement || WorldStatus.worldSpeed <= 0.1f)
         {
-            ps.playbackSpeed = 0f;
+            Debug.Log("Para particula");
+            ps.Stop();
+            //main.simulationSpeed = 0f;
         }
         else
-            ps.playbackSpeed = 1f;
-
+        {
+            Debug.Log("Toca particula");
+            ps.Play();
+            //main.simulationSpeed = 1f;
+        }
     }
 }

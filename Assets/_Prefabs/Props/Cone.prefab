@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 0
-  speedModifier: 1
+  speedModifier: 0
   destroyerTouch: 1
   interactOnBump: 1
   repeatInteraction: 0

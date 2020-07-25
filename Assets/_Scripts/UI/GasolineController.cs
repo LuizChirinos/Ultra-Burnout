@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +26,7 @@ public class GasolineController : MonoBehaviour
 
         status.SetMaxGasoline(100f);
         status.ChangeGasoline (status.maxGasoline);
-        gasolineModifier = 1f;
+        gasolineModifier = 2f;
     }
 
     void Update()
@@ -35,7 +36,13 @@ public class GasolineController : MonoBehaviour
         status.SetGasoline(Mathf.Clamp(status.gasoline, 0f, status.maxGasoline));
         gasolineFill.fillAmount = ExtensionMethods.Remap(status.gasoline, 0f, status.maxGasoline, 0f, 1f);
 
-        //Debug.Log(status.gasoline);
+        if (status.gasoline <= 0)
+        {
+            //Debug.Log("Acabou a gasolina");
+            WorldStatus.worldSpeed = Mathf.Lerp(WorldStatus.worldSpeed, 0f, 0.01f);
+            if (Mathf.Abs(WorldStatus.worldSpeed) < 0.3f)
+                WorldStatus.worldSpeed = 0f;
+        }
     }
 
     #region Custom Methods

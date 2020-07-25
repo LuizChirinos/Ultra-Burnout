@@ -90,11 +90,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStatic: 0
-  speedModifier: 1
+  speedModifier: 0
   destroyerTouch: 1
   interactOnBump: 1
   repeatInteraction: 0
   destroyOnInteraction: 1
+  interacbleSound: 1
   scoreAmount: 10
 --- !u!1001 &1254640071828331854
 PrefabInstance:
