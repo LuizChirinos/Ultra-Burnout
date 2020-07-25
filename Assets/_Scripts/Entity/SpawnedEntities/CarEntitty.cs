@@ -33,7 +33,7 @@ public class CarEntitty : PointsGiverEntity
         //Instantiate Explosion
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //Increase World Speed
-        WorldStatus.IncreaseWorldSpeed(1f);
+        WorldStatus.IncreaseWorldSpeed(0.01f);
 
         base.Interact();
     }

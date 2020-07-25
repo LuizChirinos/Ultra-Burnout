@@ -24,6 +24,6 @@ public class ObstacleEntity : InteractableEntity
         status.ChangeGasoline(-amountToLose);
         screenGlassController.IncrementScreen();
         StressReceiver.InduceStress(3f);
-        WorldStatus.DecreaseWorldSpeed(1f);
+        WorldStatus.DecreaseWorldSpeed(-1f);
     }
 }
