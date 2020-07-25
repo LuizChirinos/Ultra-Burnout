@@ -17,6 +17,6 @@ public class ScoreController : MonoBehaviour
 
     void Update()
     {
-        textScore.text = status.score.ToString();
+        textScore.text = status.score.ToString() + "X";
     }
 }
