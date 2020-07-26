@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class InteractableEntity : Entity
@@ -8,7 +7,7 @@ public class InteractableEntity : Entity
     #region Properties
     public bool interactOnBump = true;
     public bool repeatInteraction = false;
-    private bool interacted = false;
+    protected bool interacted = false;
     public bool destroyOnInteraction = true;
     public bool interacbleSound = true;
 
@@ -51,6 +50,18 @@ public class InteractableEntity : Entity
         if (interactOnBump)
         {
             if (other.CompareTag("Player"))
+            {
+                Interact();
+            }
+        }
+    }
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        if (interactOnBump)
+        {
+            if (collision.gameObject.CompareTag("Player"))
             {
                 Interact();
             }

@@ -8,6 +8,7 @@ public class SoundController : MonoBehaviour
     {
         Coin,
         Gas,
+        Obstacle
     }
 
     [System.Serializable]

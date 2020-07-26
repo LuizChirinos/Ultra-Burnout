@@ -16,10 +16,10 @@ public class WorldChageSpeed : MonoBehaviour
     private void Update()
     {
         count -= Time.deltaTime;
-        if (count <= 0f)
+        if (count <= 0f && WorldStatus.worldSpeed >= 0.1f)
         {
             count = timeToChange;
-            Debug.Log("Velocity Increased by Time");
+            //Debug.Log("Velocity Increased by Time");
             WorldStatus.IncreaseWorldSpeed(speedMultiplier);
         }
     }

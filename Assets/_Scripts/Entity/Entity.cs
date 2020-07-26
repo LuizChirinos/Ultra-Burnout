@@ -33,4 +33,15 @@ public class Entity : MonoBehaviour
             }
         }
     }
+
+    public virtual void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Destroyer"))
+        {
+            if (destroyerTouch)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
 }

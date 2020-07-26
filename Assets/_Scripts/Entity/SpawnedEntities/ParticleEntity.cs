@@ -31,7 +31,7 @@ public class ParticleEntity : InteractableEntity
         }
         else
         {
-            Debug.Log("Toca particula");
+            //Debug.Log("Toca particula");
             ps.Play();
             //main.simulationSpeed = 1f;
         }
