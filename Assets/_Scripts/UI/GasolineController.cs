@@ -26,7 +26,7 @@ public class GasolineController : MonoBehaviour
 
         status.SetMaxGasoline(100f);
         status.ChangeGasoline (status.maxGasoline);
-        gasolineModifier = 2f;
+        gasolineModifier = 3f;
     }
 
     void Update()

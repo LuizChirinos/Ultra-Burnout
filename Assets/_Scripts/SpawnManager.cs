@@ -19,6 +19,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     [Header("Spawn Fields")]
+    public bool spawnedGas = false;
     public int randomTrack;
     public int randomObject;
     public float counterSpawn;
@@ -57,7 +58,15 @@ public class SpawnManager : MonoBehaviour
             if (randomObject <= objectsToSpawn[i].chanceToSpawn)
             {
                 counterSpawn = timeToSpawn;
+                if (i == 1 && spawnedGas)
+                {
+                    continue;
+                }
+                else if (i == 1 && !spawnedGas)
+                    spawnedGas = true;
+
                 Instantiate(objectsToSpawn[i].objectToSpawn, spawns[randomTrack].position, Quaternion.identity, spawnedObjectParent);
+
                 break;
             }
             else

@@ -31,7 +31,7 @@ public class WorldStatus
         }
         else
         {
-            Debug.Log("Incorrect Sinal for IncreaseSpeed() parameter");
+            Debug.Log("Incorrect Sinal for DecreaseSpeed() parameter");
         }
     }
     public static void StopWorld(bool value)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class ObstacleEntity : InteractableEntity
     private ScreenGlassController screenGlassController;
     private SoundController soundController;
     private Rigidbody rb;
+
+    public float amountSpeedToIncrease = 1f;
     //private StressReceiver camShake;
 
     public override void Start()
@@ -35,6 +38,26 @@ public class ObstacleEntity : InteractableEntity
             soundController.Play(SoundController.Type.Obstacle);
             rb.freezeRotation = false; 
             Debug.Log("Colidiu com o cone");
+        }
+    }
+
+
+    public override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            IncreaseSpeed(amountSpeedToIncrease);
+        }
+    }
+    public override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        
+        if (other.CompareTag("Enemy"))
+        {
+            IncreaseSpeed(amountSpeedToIncrease);
         }
     }
 }

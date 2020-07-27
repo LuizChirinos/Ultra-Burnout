@@ -23,6 +23,29 @@ public class Entity : MonoBehaviour
             transform.position -= new Vector3(0f, 0f, WorldStatus.worldSpeed + speedModifier) * Time.deltaTime;
     }
 
+    public virtual void IncreaseSpeed(float amount)
+    {
+        if (amount > 0)
+        {
+            speedModifier += amount;
+        }
+        else
+        {
+            Debug.Log("Incorrect Sinal for IncreaseSpeed() parameter");
+        }
+    }
+    public virtual void DecreaseSpeed(float amount)
+    {
+        if (amount < 0)
+        {
+            speedModifier += amount;
+        }
+        else
+        {
+            Debug.Log("Incorrect Sinal for DecreaseSpeed() parameter");
+        }
+    }
+
     public virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Destroyer"))
