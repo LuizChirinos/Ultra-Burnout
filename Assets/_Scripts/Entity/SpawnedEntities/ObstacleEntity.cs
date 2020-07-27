@@ -31,7 +31,7 @@ public class ObstacleEntity : InteractableEntity
             //status.ChangeGasoline(-amountToLose);
             screenGlassController.IncrementScreen();
             StressReceiver.InduceStress(3f);
-            //WorldStatus.DecreaseWorldSpeed(-1f);
+            //-WorldStatus.DecreaseWorldSpeed(-1f);
             soundController.Play(SoundController.Type.Obstacle);
             rb.freezeRotation = false; 
             Debug.Log("Colidiu com o cone");
