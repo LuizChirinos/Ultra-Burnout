@@ -9,11 +9,12 @@ public class Entity : MonoBehaviour
     public bool isStatic = false;
     public float speedModifier = 1f;
     public bool destroyerTouch = false;
+    protected SpawnManager spawnManager;
 
     // Start is called before the first frame update
     public virtual void Start()
     {
-        
+        spawnManager = GameObject.Find("GameController").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -43,28 +44,6 @@ public class Entity : MonoBehaviour
         else
         {
             Debug.Log("Incorrect Sinal for DecreaseSpeed() parameter");
-        }
-    }
-
-    public virtual void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Destroyer"))
-        {
-            if (destroyerTouch)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
-
-    public virtual void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Destroyer"))
-        {
-            if (destroyerTouch)
-            {
-                Destroy(this.gameObject);
-            }
         }
     }
 }

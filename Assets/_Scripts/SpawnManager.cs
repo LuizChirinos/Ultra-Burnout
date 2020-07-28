@@ -10,6 +10,13 @@ public class SpawnManager : MonoBehaviour
     public List<Transform> spawns;
     public List<SpawnObject> objectsToSpawn;
 
+
+    [SerializeField]
+    private int amountSpawnedObjects;
+    private int maxObjects = 10;
+    public List<GameObject> spawnedGameObjects;
+    private int indexSpawnedObjects;
+
     [System.Serializable]
     public class SpawnObject
     {
@@ -37,6 +44,7 @@ public class SpawnManager : MonoBehaviour
         }
 
         counterSpawn = timeToSpawn;
+        indexSpawnedObjects = 0;
     }
 
     void Update()
@@ -65,7 +73,7 @@ public class SpawnManager : MonoBehaviour
                 else if (i == 1 && !spawnedGas)
                     spawnedGas = true;
 
-                Instantiate(objectsToSpawn[i].objectToSpawn, spawns[randomTrack].position, Quaternion.identity, spawnedObjectParent);
+                InstantiateObject(i);
 
                 break;
             }
@@ -76,5 +84,28 @@ public class SpawnManager : MonoBehaviour
     public void RespawnAt(Transform spawnObject, int indexPosition)
     {
         spawnObject.position = spawns[indexPosition].position;
+    }
+    public void InstantiateObject(int index)
+    {
+        if (amountSpawnedObjects < maxObjects)
+        {
+            GameObject instantiatedObject = Instantiate(objectsToSpawn[index].objectToSpawn, spawns[randomTrack].position, Quaternion.identity, spawnedObjectParent) as GameObject;
+
+            spawnedGameObjects.Add(instantiatedObject);
+            amountSpawnedObjects += 1;
+        }
+        else
+        {
+            RespawnAt(spawnedGameObjects[indexSpawnedObjects].transform, Random.Range(0, spawns.Count));
+            Debug.Log("Spawned GameObject" + spawnedGameObjects[indexSpawnedObjects].name);
+            indexSpawnedObjects += 1;
+            indexSpawnedObjects %= spawnedGameObjects.Count;
+        }
+    }
+    public void RemoveObject(GameObject reference)
+    {
+        amountSpawnedObjects -= 1;
+        spawnedGameObjects.Remove(this.gameObject);
+        Destroy(reference);
     }
 }

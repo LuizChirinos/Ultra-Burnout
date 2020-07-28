@@ -12,12 +12,18 @@ public class InteractableEntity : Entity
     public bool interacbleSound = true;
 
     private AudioSource audioSource;
+
+    public delegate void OnDestroyInteraction();
+    public OnDestroyInteraction onDestroyInteraction = delegate { };
+
     #endregion
 
     public override void Start()
     {
         base.Start();
         audioSource = GetComponent<AudioSource>();
+
+        onDestroyInteraction += Remove;
     }
 
     #region Custom Methods
@@ -35,7 +41,9 @@ public class InteractableEntity : Entity
 
             //Debug.Log("Interacted with " + gameObject.name);
             if (destroyOnInteraction)
-                Destroy(this.gameObject);
+            {
+                onDestroyInteraction();
+            }
         }
     }
     public bool CanInteract()
@@ -43,29 +51,44 @@ public class InteractableEntity : Entity
         return !interacted;
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
-        base.OnTriggerEnter(other);
-
         if (interactOnBump)
         {
             if (other.CompareTag("Player"))
             {
                 Interact();
             }
+            if (other.CompareTag("Destroyer"))
+            {
+                if (destroyerTouch)
+                {
+                    onDestroyInteraction();
+                }
+            }
         }
     }
-    public override void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
-
         if (interactOnBump)
         {
             if (collision.gameObject.CompareTag("Player"))
             {
                 Interact();
             }
+            if (collision.gameObject.CompareTag("Destroyer"))
+            {
+                if (destroyerTouch)
+                {
+                    onDestroyInteraction();
+                }
+            }
         }
+    }
+
+    public void Remove()
+    {
+        spawnManager.RemoveObject(this.gameObject);
     }
     #endregion
 }
