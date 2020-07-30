@@ -6,6 +6,10 @@ public class ScrollOffset : MonoBehaviour
 {
     Renderer renderer;
     public float velocity;
+    public bool changeDirection = false;
+    public bool invertScroll = false;
+    private float signal;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +20,15 @@ public class ScrollOffset : MonoBehaviour
     void Update()
     {
         if (!WorldStatus.stopWorldMovement)
-            renderer.material.SetTextureOffset("_MainTex", new Vector2(0f, -Time.time * WorldStatus.worldSpeed * 0.26f));
+        {
+            signal = invertScroll ? 1 : -1;
+            if (!changeDirection)
+            {
+                renderer.material.SetTextureOffset("_MainTex", new Vector2(0f, -Time.time * WorldStatus.worldSpeed * 0.26f * signal));
+            }
+            else
+                renderer.material.SetTextureOffset("_MainTex", new Vector2(-Time.time * WorldStatus.worldSpeed * 0.26f * signal, 0f));
+
+        }
     }
 }
