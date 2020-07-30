@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WorldStatus
 {
-    public static float worldSpeed = 5;
+    public static float worldSpeed = 10f;
     public static bool stopWorldMovement = false;
     public static float maxSpeed = 30f;
 

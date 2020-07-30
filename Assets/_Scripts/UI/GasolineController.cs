@@ -36,14 +36,14 @@ public class GasolineController : MonoBehaviour
         status.SetGasoline(Mathf.Clamp(status.gasoline, 0f, status.maxGasoline));
         gasolineFill.fillAmount = ExtensionMethods.Remap(status.gasoline, 0f, status.maxGasoline, 0f, 1f);
 
-        /*
+        
         if (status.gasoline <= 0)
         {
             //Debug.Log("Acabou a gasolina");
             WorldStatus.worldSpeed = Mathf.Lerp(WorldStatus.worldSpeed, 0f, 0.01f);
             if (Mathf.Abs(WorldStatus.worldSpeed) < 0.3f)
                 WorldStatus.worldSpeed = 0f;
-        }*/
+        }
     }
 
     #region Custom Methods
