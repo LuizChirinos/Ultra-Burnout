@@ -106,6 +106,6 @@ public class SpawnManager : MonoBehaviour
     {
         amountSpawnedObjects -= 1;
         spawnedGameObjects.Remove(this.gameObject);
-        Destroy(reference);
+        reference.SetActive(false);
     }
 }
