@@ -39,5 +39,11 @@ public class WorldStatus
         stopWorldMovement = value;
     }
 
+    public void StartWorld()
+    {
+        stopWorldMovement = true;
+        worldSpeed = 10f;
+    }
+
     #endregion
 }

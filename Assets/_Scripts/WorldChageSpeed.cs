@@ -12,6 +12,7 @@ public class WorldChageSpeed : MonoBehaviour
     {
         count = 0f;
         count = timeToChange;
+        //WorldStatus.StopWorld();
     }
     private void Update()
     {

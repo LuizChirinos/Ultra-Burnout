@@ -13,6 +13,8 @@ namespace PathCreationEditor {
 
         #region Fields
 
+        public PathCreatorData editorData;
+
         // Interaction:
         const float segmentSelectDistanceThreshold = 10f;
         const float screenPolylineMaxAngleError = .3f;

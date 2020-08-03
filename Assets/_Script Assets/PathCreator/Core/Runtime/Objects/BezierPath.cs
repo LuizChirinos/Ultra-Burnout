@@ -21,8 +21,8 @@ namespace PathCreation {
 
  #region Fields
 
- [SerializeField, HideInInspector]
- List<Vector3> points;
+ [SerializeField]
+ public List<Vector3> points;
  [SerializeField, HideInInspector]
  bool isClosed;
  [SerializeField, HideInInspector]
