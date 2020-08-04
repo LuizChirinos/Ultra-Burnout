@@ -227,7 +227,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5752790673321456845}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.51552725
   m_Height: 2.6188512
@@ -268,7 +268,7 @@ MonoBehaviour:
   repeatInteraction: 0
   destroyOnInteraction: 1
   interacbleSound: 0
-  scoreAmount: 10
+  amountSpeedToIncrease: 1
   explosionPrefab: {fileID: 31603659360858194, guid: b37e568b52cd0314c9c85806855fa2dc,
     type: 3}
 --- !u!82 &3402822235713620603

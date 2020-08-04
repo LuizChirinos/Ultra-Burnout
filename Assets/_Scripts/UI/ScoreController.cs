@@ -8,6 +8,7 @@ public class ScoreController : MonoBehaviour
     #region
     private PlayerStatus status;
     public Text textScore;
+    private float scoreModifier = 2f;
     #endregion
 
     void Start()
@@ -17,6 +18,8 @@ public class ScoreController : MonoBehaviour
 
     void Update()
     {
-        textScore.text = status.score.ToString() + "X";
+        float signal = WorldStatus.stopWorldMovement ? 0 : 1;
+        textScore.text = status.score.ToString("0") + "X";
+        status.score += (Time.deltaTime * scoreModifier * signal);
     }
 }

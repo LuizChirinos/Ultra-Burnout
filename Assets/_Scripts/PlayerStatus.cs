@@ -43,10 +43,12 @@ public class PlayerStatus : MonoBehaviour
     public void ChangeScore(float amount)
     {
         score += amount;
+        score = Mathf.Ceil(score);
     }
     public void SetScore (float value)
     {
         score = value;
+        score = Mathf.Ceil(score);
     }
     #endregion
 }

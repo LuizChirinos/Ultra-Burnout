@@ -20,6 +20,7 @@ public class LoopEntity : InteractableEntity
         {
             //Debug.Log("Interacted with Destroyer, " + gameObject.name);
             spawnManager.RespawnAt(this.transform, 1);
+            Debug.Log("Respawn Entity " + gameObject.name);
         }
     }
 }

@@ -15,6 +15,7 @@ public class WorldStatus
         if (amount > 0)
         {
             worldSpeed += amount;
+            Debug.Log("WorldStatus speed " + WorldStatus.worldSpeed);
             worldSpeed = Mathf.Clamp(worldSpeed, 0f, maxSpeed);
         }
         else
@@ -28,6 +29,7 @@ public class WorldStatus
         {
             worldSpeed += amount;
             worldSpeed = Mathf.Clamp(worldSpeed, 0f, maxSpeed);
+            Debug.Log("WorldStatus speed " + WorldStatus.worldSpeed);
         }
         else
         {

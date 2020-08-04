@@ -7,12 +7,15 @@ public class WorldChageSpeed : MonoBehaviour
     private float count;
     private float timeToChange = 10f;
     private float speedMultiplier = 1f;
+    public delegate void OnWorldChangeSpeed(float amount);
+    public OnWorldChangeSpeed onChangeSpeed = delegate { };
     
     void Start()
     {
         count = 0f;
         count = timeToChange;
         //WorldStatus.StopWorld();
+        onChangeSpeed += WorldStatus.IncreaseWorldSpeed;
     }
     private void Update()
     {
@@ -21,7 +24,7 @@ public class WorldChageSpeed : MonoBehaviour
         {
             count = timeToChange;
             //Debug.Log("Velocity Increased by Time");
-            WorldStatus.IncreaseWorldSpeed(speedMultiplier);
+            onChangeSpeed(speedMultiplier);
         }
     }
 

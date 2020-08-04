@@ -66,11 +66,11 @@ public class SpawnManager : MonoBehaviour
             if (randomObject <= objectsToSpawn[i].chanceToSpawn)
             {
                 counterSpawn = timeToSpawn;
-                if (i == 1 && spawnedGas)
+                if (objectsToSpawn[i].objectToSpawn.name.Contains("Gas") && spawnedGas)
                 {
                     continue;
                 }
-                else if (i == 1 && !spawnedGas)
+                else if (objectsToSpawn[i].objectToSpawn.name.Contains("Gas") && !spawnedGas)
                     spawnedGas = true;
 
                 InstantiateObject(i);
@@ -87,25 +87,26 @@ public class SpawnManager : MonoBehaviour
     }
     public void InstantiateObject(int index)
     {
-        if (amountSpawnedObjects < maxObjects)
-        {
+        //if (amountSpawnedObjects < maxObjects)
+        //{
             GameObject instantiatedObject = Instantiate(objectsToSpawn[index].objectToSpawn, spawns[randomTrack].position, Quaternion.identity, spawnedObjectParent) as GameObject;
 
-            spawnedGameObjects.Add(instantiatedObject);
-            amountSpawnedObjects += 1;
-        }
-        else
-        {
-            RespawnAt(spawnedGameObjects[indexSpawnedObjects].transform, Random.Range(0, spawns.Count));
-            Debug.Log("Spawned GameObject" + spawnedGameObjects[indexSpawnedObjects].name);
-            indexSpawnedObjects += 1;
-            indexSpawnedObjects %= spawnedGameObjects.Count;
-        }
+            //spawnedGameObjects.Add(instantiatedObject);
+            //amountSpawnedObjects += 1;
+        //}
+        //else
+        //{
+            //RespawnAt(spawnedGameObjects[indexSpawnedObjects].transform, Random.Range(0, spawns.Count));
+            //Debug.Log("Spawned GameObject" + spawnedGameObjects[indexSpawnedObjects].name);
+            //indexSpawnedObjects += 1;
+            //indexSpawnedObjects %= spawnedGameObjects.Count;
+        //}
     }
     public void RemoveObject(GameObject reference)
     {
-        amountSpawnedObjects -= 1;
-        spawnedGameObjects.Remove(this.gameObject);
-        reference.SetActive(false);
+        //amountSpawnedObjects -= 1;
+        //spawnedGameObjects.Remove(this.gameObject);
+        //reference.SetActive(false);
+        Destroy(reference);
     }
 }

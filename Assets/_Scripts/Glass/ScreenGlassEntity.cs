@@ -9,12 +9,14 @@ public class ScreenGlassEntity : MonoBehaviour
     private float alpha;
     private Color color;
     private float alphaMultiplier = 4f;
+    private ScreenGlassController controller;
 
     private void Start()
     {
         if (glass == null)
             glass = GetComponent<Image>();
 
+        controller = GameObject.Find("GameController").GetComponent<ScreenGlassController>();
         alpha = 1f;
         color = glass.color;
     }
@@ -31,6 +33,7 @@ public class ScreenGlassEntity : MonoBehaviour
         if (alpha <= 0f)
         {
             gameObject.SetActive(false);
+            controller.hits--;
         }
     }
 }

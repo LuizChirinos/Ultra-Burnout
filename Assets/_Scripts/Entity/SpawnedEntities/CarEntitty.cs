@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CarEntitty : PointsGiverEntity
+public class CarEntitty : ObstacleEntity
 {
     #region Properties
     private PlayerStatus status;
@@ -29,11 +29,10 @@ public class CarEntitty : PointsGiverEntity
     public override void Interact()
     {
         //Shakes Camera
-        StressReceiver.InduceStress(1f);
         //Instantiate Explosion
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        //Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //Increase World Speed
-        WorldStatus.IncreaseWorldSpeed(0.01f);
+        WorldStatus.DecreaseWorldSpeed(-0.01f);
 
         base.Interact();
     }

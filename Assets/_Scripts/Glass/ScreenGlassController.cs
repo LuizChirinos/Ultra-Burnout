@@ -7,6 +7,8 @@ public class ScreenGlassController : MonoBehaviour
 {
     public GameObject[] glasses;
     public int currentIndex = 0;
+    public int hits;
+    private int maxHits = 2;
 
     private void Start()
     {
@@ -16,10 +18,18 @@ public class ScreenGlassController : MonoBehaviour
             glass.SetActive(false);
         }
     }
+    private void Update()
+    {
+        if (hits >= maxHits)
+        {
+            WorldStatus.StopWorld(true);
+        }
+    }
 
     public void IncrementScreen()
     {
         glasses[currentIndex].SetActive(true);
+        hits++;
         currentIndex += 1;
         currentIndex %= glasses.Length;
     }
