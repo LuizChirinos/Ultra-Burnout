@@ -22,7 +22,7 @@ public class ScreenGlassController : MonoBehaviour
     {
         if (hits >= maxHits)
         {
-            WorldStatus.StopWorld(true);
+            //WorldStatus.StopWorld(true);
         }
     }
 

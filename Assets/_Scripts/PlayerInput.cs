@@ -33,10 +33,10 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
         left = Input.GetKeyDown(KeyCode.A);
         right = Input.GetKeyDown(KeyCode.D);
-#endif
+//#endif
 
         vertical = Input.GetAxis("Vertical");
         jump = Input.GetButtonDown("Jump");

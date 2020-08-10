@@ -8,29 +8,29 @@ public class SpawnManager : MonoBehaviour
     private Transform scenario;
     private Transform spawnedObjectParent;
     public List<Transform> spawns;
-    public List<SpawnObject> objectsToSpawn;
 
-
-    [SerializeField]
-    private int amountSpawnedObjects;
     private int maxObjects = 10;
     public List<GameObject> spawnedGameObjects;
-    private int indexSpawnedObjects;
 
     [System.Serializable]
     public class SpawnObject
     {
         public GameObject objectToSpawn;
         public int chanceToSpawn;
-
     }
+    [System.Serializable]
+    public class SpawnInfo
+    {
+        public List<SpawnObject> spawnObjects;
+        public float counterSpawn;
+        public float timeToSpawn = 1f;
+    }
+    public SpawnInfo[] spawnInfo;
 
     [Header("Spawn Fields")]
     public bool spawnedGas = false;
     public int randomTrack;
     public int randomObject;
-    public float counterSpawn;
-    public float timeToSpawn = 1f;
 
     void Start()
     {
@@ -43,37 +43,42 @@ public class SpawnManager : MonoBehaviour
             spawns.Add(spawnParent.GetChild(i));
         }
 
-        counterSpawn = timeToSpawn;
-        indexSpawnedObjects = 0;
+        spawnInfo[0].counterSpawn = spawnInfo[0].timeToSpawn;
     }
 
     void Update()
     {
-        counterSpawn -= Time.deltaTime * WorldStatus.worldSpeed / 10f;
-        if (counterSpawn <= 0f)
+        spawnInfo[0].counterSpawn -= Time.deltaTime * WorldStatus.worldSpeed / 10f;
+        if (spawnInfo[0].counterSpawn <= 0f)
         {
-            counterSpawn = timeToSpawn;
+            spawnInfo[0].counterSpawn = spawnInfo[0].timeToSpawn;
             randomTrack = Random.Range(0, spawns.Count);
             RandomizeSpawn();
+        }
+        if (spawnInfo[1].counterSpawn <= 0f)
+        {
+            spawnInfo[1].counterSpawn = spawnInfo[1].timeToSpawn;
+            randomTrack = Random.Range(0, spawns.Count);
+            InstantiateObject(1, 0);
         }
     }
     private void RandomizeSpawn()
     {
-        for (int i = 0; i < objectsToSpawn.Count; i++)
+        for (int i = 0; i < spawnInfo[0].spawnObjects.Count; i++)
         {
             randomObject = Random.Range(0, 10);
 
-            if (randomObject <= objectsToSpawn[i].chanceToSpawn)
+            if (randomObject <= spawnInfo[0].spawnObjects[i].chanceToSpawn)
             {
-                counterSpawn = timeToSpawn;
-                if (objectsToSpawn[i].objectToSpawn.name.Contains("Gas") && spawnedGas)
+                spawnInfo[0].counterSpawn = spawnInfo[0].timeToSpawn;
+                if (spawnInfo[0].spawnObjects[i].objectToSpawn.name.Contains("Gas") && spawnedGas)
                 {
                     continue;
                 }
-                else if (objectsToSpawn[i].objectToSpawn.name.Contains("Gas") && !spawnedGas)
+                else if (spawnInfo[0].spawnObjects[i].objectToSpawn.name.Contains("Gas") && !spawnedGas)
                     spawnedGas = true;
 
-                InstantiateObject(i);
+                InstantiateObject(0, i);
 
                 break;
             }
@@ -85,28 +90,12 @@ public class SpawnManager : MonoBehaviour
     {
         spawnObject.position = spawns[indexPosition].position;
     }
-    public void InstantiateObject(int index)
+    public void InstantiateObject(int spawnInfoIndex, int indexObject)
     {
-        //if (amountSpawnedObjects < maxObjects)
-        //{
-            GameObject instantiatedObject = Instantiate(objectsToSpawn[index].objectToSpawn, spawns[randomTrack].position, Quaternion.identity, spawnedObjectParent) as GameObject;
-
-            //spawnedGameObjects.Add(instantiatedObject);
-            //amountSpawnedObjects += 1;
-        //}
-        //else
-        //{
-            //RespawnAt(spawnedGameObjects[indexSpawnedObjects].transform, Random.Range(0, spawns.Count));
-            //Debug.Log("Spawned GameObject" + spawnedGameObjects[indexSpawnedObjects].name);
-            //indexSpawnedObjects += 1;
-            //indexSpawnedObjects %= spawnedGameObjects.Count;
-        //}
+        GameObject instantiatedObject = Instantiate(spawnInfo[spawnInfoIndex].spawnObjects[indexObject].objectToSpawn, spawns[randomTrack].position, Quaternion.identity, spawnedObjectParent) as GameObject;
     }
     public void RemoveObject(GameObject reference)
     {
-        //amountSpawnedObjects -= 1;
-        //spawnedGameObjects.Remove(this.gameObject);
-        //reference.SetActive(false);
         Destroy(reference);
     }
 }

@@ -10,6 +10,7 @@ public class InteractableEntity : Entity
     protected bool interacted = false;
     public bool destroyOnInteraction = true;
     public bool interacbleSound = true;
+    protected PlayerStatus playerStatus;
 
     private AudioSource audioSource;
 
@@ -24,6 +25,7 @@ public class InteractableEntity : Entity
         audioSource = GetComponent<AudioSource>();
 
         onDestroyInteraction += Remove;
+        playerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
     }
 
     #region Custom Methods

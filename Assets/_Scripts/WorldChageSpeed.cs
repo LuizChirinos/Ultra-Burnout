@@ -9,6 +9,8 @@ public class WorldChageSpeed : MonoBehaviour
     private float speedMultiplier = 1f;
     public delegate void OnWorldChangeSpeed(float amount);
     public OnWorldChangeSpeed onChangeSpeed = delegate { };
+    [Range(0, 50)]
+    public float timeScale = 1;
     
     void Start()
     {
@@ -19,6 +21,8 @@ public class WorldChageSpeed : MonoBehaviour
     }
     private void Update()
     {
+        Time.timeScale = timeScale;
+
         count -= Time.deltaTime;
         if (count <= 0f && WorldStatus.worldSpeed >= 0.1f)
         {

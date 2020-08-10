@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,22 @@ public class LoopEntity : InteractableEntity
         spawnManager = GameObject.Find("GameController").GetComponent<SpawnManager>();
     }
 
+    public override void Update()
+    {
+        base.Update();
+        if (this.transform.position.z < playerStatus.transform.position.z)
+        {
+            //interacted = true;
+            //Invoke("InvokeInteraction", 1f);
+            Interact();
+        }
+    }
+    public override void Interact()
+    {
+        base.Interact();
+        spawnManager.RespawnAt(this.transform, 1);
+    }
+
     public override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
@@ -22,5 +39,11 @@ public class LoopEntity : InteractableEntity
             spawnManager.RespawnAt(this.transform, 1);
             Debug.Log("Respawn Entity " + gameObject.name);
         }
+    }
+
+    private void InvokeInteraction()
+    {
+        Interact();
+        interacted = false;
     }
 }
